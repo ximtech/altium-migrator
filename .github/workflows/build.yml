@@ -6,8 +6,6 @@ on:
   pull_request:
     branches: [ main ]
 
-env:
-  BUILD_TYPE: Debug
 
 jobs:
   build:
@@ -17,8 +15,9 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Set up JDK
-      uses: actions/setup-java@v2
+      uses: actions/setup-java@v3
       with:
+        distribution: 'zulu'
         java-version: '17'
           
     - name: Cache Gradle packages
