@@ -43,7 +43,5 @@ jobs:
       run: gradle bootBuildImage
       
     - name: Push docker image
-      uses: docker/build-push-action@v3
-      with:
-        push: true
-        tags: latest
+      run: |
+        docker push ximtech/altium-migrator
