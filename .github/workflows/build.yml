@@ -46,4 +46,4 @@ jobs:
       run: docker tag altium-migrator ximtech/altium-migrator:latest
       
     - name: Push docker image
-      run: docker images && docker push ${{ secrets.DOCKERHUB_USERNAME }}/altium-migrator:latest
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/altium-migrator:latest
