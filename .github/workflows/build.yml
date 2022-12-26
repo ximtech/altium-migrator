@@ -39,5 +39,8 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         
-    - name: Build and Push docker image
-      run: gradle bootBuildImage && docker images && docker push docker.io/library/altium-migrator:latest
+    - name: Build docker image
+      run: gradle bootBuildImage
+      
+    - name: Push docker image
+      run: docker images && docker push ${{secrets.DOCKERHUB_USERNAME}}/altium-migrator:latest
