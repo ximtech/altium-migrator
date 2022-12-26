@@ -40,5 +40,4 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         
     - name: Build and Push docker image
-      run: |
-      gradle bootBuildImage && docker push ximtech/altium-migrator:latest
+      run: gradle bootBuildImage && docker push ximtech/altium-migrator:latest
