@@ -44,4 +44,4 @@ jobs:
       
     - name: Push docker image
       run: |
-        docker push ximtech/altium-migrator
+        docker push ximtech/altium-migrator:latest
