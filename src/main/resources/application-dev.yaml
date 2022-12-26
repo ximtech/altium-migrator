@@ -1,0 +1,12 @@
+server:
+  error:
+    include-stacktrace: always
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/altium-components
+    username: postgres
+    password: postgres
+
+logging:
+  config: classpath:logging/log4j-dev.yaml

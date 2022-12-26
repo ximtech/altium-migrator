@@ -1,0 +1,31 @@
+server:
+  port: 8093
+  error:
+    whitelabel:
+      enabled: false
+    include-stacktrace: never # do not show stacktrace in response json for ResponseStatusException(when 404 and etc) 
+    
+spring:
+  liquibase:
+    enabled: false  # migration scripts has been stored in separate git repository 
+  profiles:
+    active: ${PROFILE:dev}
+  main:
+    allow-bean-definition-overriding: true
+    
+  datasource:
+    hikari:
+      minimum-idle: 1
+      idle-timeout: 10000
+      maximumPoolSize: 2
+
+  sql:
+    init:
+      platform: postgres
+      continue-on-error: false
+
+git.repository.url: "https://github.com/ximtech/altium-library"
+git.repository.directory.name: "migrations"
+
+migration.root.folder: "db"
+db.changelog.file.name: "db.changelog-master.xml"

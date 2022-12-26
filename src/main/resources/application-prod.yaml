@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: ${ALTIUM_DB_DATASOURCE}
+    username: ${ALTIUM_DB_USERNAME}
+    password: ${ALTIUM_DB_PASSWORD}
+
+logging:
+  config: classpath:logging/log4j-prod.yaml

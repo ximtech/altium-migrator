@@ -1,0 +1,98 @@
+plugins {
+    id 'idea'
+    id 'java'
+    id 'groovy'
+    id 'org.springframework.boot' version '3.0.0'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.altium.migrator'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+bootJar {
+    archivesBaseName = 'altium-migrator'
+}
+
+bootBuildImage {
+    builder = 'paketobuildpacks/builder:tiny'
+    imageName = 'altium-migrator'
+}
+
+ext {
+    jgitVersion = '6.4.0.202211300538-r'
+    testContainersVersion = '1.17.6'
+    commonsIOVersion = '2.11.0'
+}
+
+sourceSets {
+    test {
+        groovy {
+            srcDirs = ['src/test/groovy']
+        }
+        resources {
+            srcDirs = ['src/test/resources']
+        }
+    }
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation "org.liquibase:liquibase-core"
+    implementation "org.eclipse.jgit:org.eclipse.jgit:$jgitVersion"
+    implementation "org.eclipse.jgit:org.eclipse.jgit.ssh.apache:$jgitVersion"
+    implementation "org.eclipse.jgit:org.eclipse.jgit.gpg.bc:$jgitVersion"
+    implementation "commons-io:commons-io:$commonsIOVersion"
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
+    
+    compileOnly "org.projectlombok:lombok"
+    runtimeOnly "org.postgresql:postgresql"
+    
+    // Testing, Spock, Groovy
+    testImplementation "org.codehaus.groovy:groovy-all:3.0.8"
+    testImplementation "org.spockframework:spock-core:2.3-groovy-3.0"
+    testImplementation "org.spockframework:spock-spring:2.3-groovy-3.0"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:spock:$testContainersVersion"
+    implementation platform("org.testcontainers:testcontainers-bom:$testContainersVersion")
+    testImplementation "org.testcontainers:postgresql"
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    annotationProcessor "org.projectlombok:lombok"
+}
+
+configurations {
+    all*.exclude module: 'spring-boot-starter-logging'
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+test {
+    useJUnitPlatform()
+    systemProperties System.properties
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
