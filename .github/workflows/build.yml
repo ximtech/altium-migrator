@@ -43,7 +43,7 @@ jobs:
       run: gradle bootBuildImage
       
     - name: Tag docker image
-      run: docker tag altium-migrator ximtech/altium-migrator:latest
+      run: docker tag altium-migrator ${{ secrets.DOCKERHUB_USERNAME }}/altium-migrator:latest
       
     - name: Push docker image
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/altium-migrator:latest

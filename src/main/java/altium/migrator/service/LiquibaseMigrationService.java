@@ -32,15 +32,19 @@ public class LiquibaseMigrationService {
     
     @SneakyThrows
     public void processDataMigration() {
+        Liquibase liquibase = null;
         log.info("Started database migration");
         File changelogDirectory = ResourceUtils.getFile(String.format("classpath:%s/migrations", migrationRootFolder));
         try (Connection connection = this.dataSource.getConnection()) {
             DirectoryResourceAccessor resourceAccessor = new DirectoryResourceAccessor(changelogDirectory);
-            Liquibase liquibase = new Liquibase(dbChangelogFileName, resourceAccessor, new JdbcConnection(connection));
+            liquibase = new Liquibase(dbChangelogFileName, resourceAccessor, new JdbcConnection(connection));
             Contexts contexts = new Contexts();
             liquibase.update(contexts);
             connection.commit();
         } catch (SQLException | LiquibaseException e) {
+            if (liquibase != null) {
+                liquibase.forceReleaseLocks();
+            }
             throw new RuntimeException("Error during liquibase execution", e);
         }
         log.info("Migration successfully finished");

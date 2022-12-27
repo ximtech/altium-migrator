@@ -3,8 +3,6 @@ version: '2.4'
 services:
   server:
     image: altium-migrator:latest
-    environment:
-      - PROFILE=docker-dev
     ports:
     - 5432:5432
     command: --spring.profiles.active=docker-dev
