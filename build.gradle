@@ -30,7 +30,6 @@ jar {
 
 bootJar {
     archivesBaseName = 'altium-migrator'
-    classpath sourceSets.main.runtimeClasspath
 }
 
 bootBuildImage {

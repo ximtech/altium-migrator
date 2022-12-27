@@ -1,0 +1,2 @@
+Do not delete this file!! 
+Some other Gradle versions and build on CI can remove empty directories from project and that's way corrupt runtime.
