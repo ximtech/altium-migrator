@@ -40,7 +40,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         
     - name: Build docker image
-      run: gradle bootBuildImage
+      run: gradle bootBuildImage --info
       
     - name: Tag docker image
       run: docker tag altium-migrator ${{ secrets.DOCKERHUB_USERNAME }}/altium-migrator:latest
