@@ -5,11 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.net.URL;
 
 @Slf4j
 @Service
@@ -28,8 +27,8 @@ public class GitRepositoryService {
     public void cloneRepositoryWithChangelog() {
         log.info("Accessing git repository: {}", gitRepositoryUrl);
 
-        URL destinationFolderUrl = ResourceUtils.getURL("classpath:" + migrationRootFolder);
-        File destinationFolder = new File(destinationFolderUrl.toURI());
+        ClassPathResource resource = new ClassPathResource(migrationRootFolder);
+        File destinationFolder = resource.getFile();
         FileUtils.cleanDirectory(destinationFolder);
         Git gitRepository = Git.cloneRepository()
                 .setURI(gitRepositoryUrl)
