@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -19,15 +19,14 @@ public class GitRepositoryService {
 
     @Value("${git.repository.directory.name}")
     private String gitDirectoryName;
-
-    @Value("${migration.root.folder}")
-    private String migrationRootFolder;
+    
+    @Value("classpath:${migration.root.folder}")
+    private Resource resource;
 
     @SneakyThrows
     public void cloneRepositoryWithChangelog() {
         log.info("Accessing git repository: {}", gitRepositoryUrl);
-
-        ClassPathResource resource = new ClassPathResource(migrationRootFolder);
+        
         File destinationFolder = resource.getFile();
         FileUtils.cleanDirectory(destinationFolder);
         Git gitRepository = Git.cloneRepository()
