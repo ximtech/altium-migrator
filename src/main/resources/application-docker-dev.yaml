@@ -3,7 +3,6 @@ server:
     include-stacktrace: always
 
 spring:
-
   datasource:
     url: jdbc:postgresql://host.docker.internal:5432/altium-components
     username: postgres
