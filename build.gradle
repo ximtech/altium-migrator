@@ -30,6 +30,7 @@ jar {
 
 bootJar {
     archivesBaseName = 'altium-migrator'
+    classpath sourceSets.main.runtimeClasspath
 }
 
 bootBuildImage {
@@ -45,12 +46,6 @@ ext {
 }
 
 sourceSets {
-    main {
-        resources {
-            srcDirs = ['src/main/resources']
-        }
-    }
-    
     test {
         groovy {
             srcDirs = ['src/test/groovy']
