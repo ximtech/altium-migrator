@@ -41,9 +41,12 @@ public class LiquibaseMigrationService {
             Contexts contexts = new Contexts();
             liquibase.update(contexts);
             connection.commit();
+            
         } catch (SQLException | LiquibaseException e) {
             if (liquibase != null) {
-                liquibase.forceReleaseLocks();
+                try {
+                    liquibase.forceReleaseLocks();
+                } catch (LiquibaseException ignore) {}
             }
             throw new RuntimeException("Error during liquibase execution", e);
         }
