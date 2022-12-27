@@ -29,7 +29,7 @@ bootJar {
 }
 
 bootBuildImage {
-    builder = 'paketobuildpacks/builder:tiny'
+    builder = 'paketobuildpacks/builder:base'
     imageName = 'altium-migrator'
     publish = false
 }
