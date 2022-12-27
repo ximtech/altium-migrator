@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -19,26 +18,29 @@ public class GitRepositoryService {
 
     @Value("${git.repository.directory.name}")
     private String gitDirectoryName;
-    
-    @Value("classpath:${migration.root.folder}")
-    private Resource resource;
+
+    @Value("${migration.root.folder}")
+    private String destinationPath;
 
     @SneakyThrows
     public void cloneRepositoryWithChangelog() {
-        log.info("Accessing git repository: {}", gitRepositoryUrl);
-        
-        File destinationFolder = resource.getFile();
+        File destinationFolder = new File(destinationPath);
+        if (!destinationFolder.exists()) {
+            log.info("Git migration directory not found: {}. Creating new one.", destinationPath);
+            FileUtils.forceMkdir(destinationFolder);
+        }
         FileUtils.cleanDirectory(destinationFolder);
-        Git gitRepository = Git.cloneRepository()
+
+        log.info("Accessing git repository: {}", gitRepositoryUrl);
+        Git.cloneRepository()
                 .setURI(gitRepositoryUrl)
                 .setDirectory(destinationFolder)
                 .setBranch("refs/heads/main")
                 .setCloneAllBranches(false)
                 .setCloneSubmodules(true)
                 .setNoCheckout(true)
-                .call();
-        
-        gitRepository.checkout()
+                .call()
+                .checkout()
                 .setStartPoint("origin/main")
                 .addPath(gitDirectoryName)
                 .call();

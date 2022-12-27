@@ -34,7 +34,7 @@ public class LiquibaseMigrationService {
     public void processDataMigration() {
         Liquibase liquibase = null;
         log.info("Started database migration");
-        File changelogDirectory = ResourceUtils.getFile(String.format("classpath:%s/migrations", migrationRootFolder));
+        File changelogDirectory = new File(migrationRootFolder);
         try (Connection connection = this.dataSource.getConnection()) {
             DirectoryResourceAccessor resourceAccessor = new DirectoryResourceAccessor(changelogDirectory);
             liquibase = new Liquibase(dbChangelogFileName, resourceAccessor, new JdbcConnection(connection));
