@@ -24,8 +24,13 @@ repositories {
     mavenCentral()
 }
 
+jar {
+    enabled = false
+}
+
 bootJar {
     archivesBaseName = 'altium-migrator'
+    from('src/main/resources')
 }
 
 bootBuildImage {
