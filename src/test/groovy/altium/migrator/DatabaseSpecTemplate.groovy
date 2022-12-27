@@ -29,8 +29,7 @@ class DatabaseSpecTemplate extends Specification {
             .withDatabaseName(POSTGRES_DB_NAME)
             .withUsername(POSTGRES_USERNAME)
             .withPassword(POSTGRES_PASSWORD)
-
-
+    
     static class DataSourceInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
         @Override

@@ -1,5 +1,1 @@
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/test-altium-components
-    username: postgres
-    password: postgres
+migration.root.folder: "src/test/resources/db"

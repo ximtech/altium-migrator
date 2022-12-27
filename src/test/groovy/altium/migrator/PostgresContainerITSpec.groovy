@@ -1,13 +1,8 @@
 package altium.migrator
 
-import altium.migrator.service.DataProcessingService
 import altium.migrator.service.GitRepositoryService
-import altium.migrator.service.LiquibaseMigrationService
-import org.mockito.Spy
 import org.spockframework.spring.SpringBean
-import org.spockframework.spring.SpringSpy
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 
 class PostgresContainerITSpec extends DatabaseSpecTemplate {

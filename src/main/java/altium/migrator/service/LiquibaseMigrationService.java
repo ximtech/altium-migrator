@@ -25,7 +25,7 @@ public class LiquibaseMigrationService {
     @Value("${db.changelog.file.name}")
     private String dbChangelogFileName;
 
-    @Value("${migration.root.folder}")
+    @Value("${migration.root.folder}/${git.repository.directory.name}")
     private String migrationRootFolder;
 
     private final DataSource dataSource;
