@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
+import java.net.URL;
 
 @Slf4j
 @Service
@@ -27,7 +28,8 @@ public class GitRepositoryService {
     public void cloneRepositoryWithChangelog() {
         log.info("Accessing git repository: {}", gitRepositoryUrl);
 
-        File destinationFolder = ResourceUtils.getFile("classpath:" + migrationRootFolder);
+        URL destinationFolderUrl = ResourceUtils.getURL("classpath:" + migrationRootFolder);
+        File destinationFolder = new File(destinationFolderUrl.toURI());
         FileUtils.cleanDirectory(destinationFolder);
         Git gitRepository = Git.cloneRepository()
                 .setURI(gitRepositoryUrl)
