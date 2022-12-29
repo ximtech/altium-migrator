@@ -13,7 +13,7 @@ import java.io.File;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class DataProcessingService implements CommandLineRunner {
+public class MigrationCommandRunner implements CommandLineRunner {
     
     private final GitRepositoryService gitRepositoryService;
     private final LiquibaseMigrationService migrationService;
