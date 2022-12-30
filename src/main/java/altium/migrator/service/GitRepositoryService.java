@@ -23,11 +23,11 @@ public class GitRepositoryService {
 
     @SneakyThrows
     public void cloneRepositoryWithChangelog() {
-        File destinationFolder = new File(destinationPath);
+        File destinationDirectory = new File(destinationPath);
         log.info("Accessing git repository: {}", gitRepositoryUrl);
         Git.cloneRepository()
                 .setURI(gitRepositoryUrl)
-                .setDirectory(destinationFolder)
+                .setDirectory(destinationDirectory)
                 .setBranch("refs/heads/main")
                 .setCloneAllBranches(false)
                 .setCloneSubmodules(true)
@@ -38,6 +38,6 @@ public class GitRepositoryService {
                 .addPath(gitDirectoryName)
                 .call();
 
-        log.info("Git repository successfully cloned to path: {}", destinationFolder.getPath());
+        log.info("Git repository successfully cloned to path: {}", destinationDirectory.getPath());
     }
 }
