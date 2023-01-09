@@ -22,11 +22,11 @@ or any other hosted Postgres database by data source.
 2. After Docker has been installed, check it with: `docker ps` in command prompt
 3. Then need to signup for Docker hub. Open Docker desktop and then `Sign in`: 
 
-![<img width="20" height="20"/>](assets/docker_config.PNG)
+![<img width="20" height="20"/>](assets/docker_config.png)
 
 4. Check login with command: `docker login`
 
-![<img width="20" height="20"/>](assets/docker_login.PNG)
+![<img width="20" height="20"/>](assets/docker_login.png)
 
 5. Now when Docker has configured. Need to install PostgresDB for local environment
     - ***First option.*** Run Database in container see [here](https://hub.docker.com/_/postgres)
@@ -43,10 +43,10 @@ or any other hosted Postgres database by data source.
     - ***Second option.*** Download and install Postgres for local development [here](https://www.postgresql.org/download/windows/) -> `Download the installer`
         - Download and install PgAdmin tool from [here](https://www.pgadmin.org/)
         - Create empty Database: 
-          - ![<img width="20" height="20"/>](assets/database.PNG)
+          - ![<img width="20" height="20"/>](assets/database.png)
         - In `Database` field write: `altium-components` -> `Save`
         - Check that empty database has been created: 
-          - ![<img width="20" height="20"/>](assets/empty_database.PNG)
+          - ![<img width="20" height="20"/>](assets/empty_database.png)
           
 6. When all has been configured and empty Database created. Then run application
 
@@ -66,7 +66,7 @@ docker run -p 5432:5432 -e PROFILE=docker-dev ximtech/altium-migrator
 ```
 
 7. At the end check that all data has been transferred:
-- ![<img width="20" height="20"/>](assets/migration_finished.PNG)
+- ![<img width="20" height="20"/>](assets/migration_finished.png)
    
 ***Database Structure***
-- ![<img width="20" height="20"/>](assets/success.PNG)
+- ![<img width="20" height="20"/>](assets/success.png)
