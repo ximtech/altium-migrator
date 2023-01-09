@@ -11,7 +11,7 @@ or any other hosted Postgres database by data source.
 
 1. User run docker command, then if application image is not in local storage it will be downloaded from public docker hub
 2. The container will start with user provided DB connection or default for local development
-3. After the start, application will fetch from repository migration scrips(database sql dump)
+3. After the start, application will fetch from repository migration scripts(database sql dump)
 4. Then liquibase migration tool will check database state and update it if needed
 5. Application can be run as many times as needed, it won't overwrite data or duplicate them.
 
@@ -20,7 +20,7 @@ or any other hosted Postgres database by data source.
 
 1. First, download and install Docker here: [Download Docker Desktop for Windows](https://www.docker.com/products/docker-desktop/)
 2. After Docker has been installed, check it with: `docker ps` in command prompt
-3. Then need to signup for Docker hub. Open Docker desktop and then `Sign in`: 
+3. Then need to signup/sign-in for Docker hub. Open Docker desktop and then `Sign in`: 
 
 ![<img width="20" height="20"/>](assets/docker_config.png)
 
@@ -56,6 +56,9 @@ docker run -p 5432:5432 -e PROFILE=docker-dev ximtech/altium-migrator
 ```
 
 ***Custom Database Hosting***
+
+***Note:*** For custom datasource do not change `PROFILE` variable
+
 ```text
     docker run -p 5432:5432 \
     -e PROFILE=prod \
