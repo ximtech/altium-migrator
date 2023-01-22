@@ -1,5 +1,7 @@
 # Altium database migration tool
 
+[![build](https://github.com/ximtech/altium-migrator/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ximtech/altium-migrator/actions/workflows/build.yml)
+
 The Altium database migration tool is a Spring boot application that helps handle changes from
 [Git component repository](https://github.com/ximtech/altium-library) to local database for offline development
 or any other hosted Postgres database by data source.
