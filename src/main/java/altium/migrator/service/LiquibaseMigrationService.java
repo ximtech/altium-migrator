@@ -42,12 +42,13 @@ public class LiquibaseMigrationService {
             connection.commit();
             
         } catch (SQLException | LiquibaseException e) {
+            log.error("Error during liquibase execution: [{}]", e.getMessage());
             if (liquibase != null) {
                 try {
                     liquibase.forceReleaseLocks();
                 } catch (LiquibaseException ignore) {}
             }
-            throw new RuntimeException("Error during liquibase execution", e);
+            throw new RuntimeException(e);
         }
         log.info("Migration successfully finished");
     }
