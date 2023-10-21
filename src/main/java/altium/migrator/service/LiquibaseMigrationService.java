@@ -2,6 +2,7 @@ package altium.migrator.service;
 
 import liquibase.Contexts;
 import liquibase.Liquibase;
+import liquibase.database.core.PostgresDatabase;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.LiquibaseException;
 import liquibase.resource.DirectoryResourceAccessor;
@@ -27,6 +28,9 @@ public class LiquibaseMigrationService {
     @Value("${migration.root.folder}/${git.repository.directory.name}")
     private String migrationRootFolder;
 
+    @Value("${db.schema.name}")
+    private String defaultSchemaName;
+
     private final DataSource dataSource;
     
     @SneakyThrows
@@ -36,7 +40,10 @@ public class LiquibaseMigrationService {
         File changelogDirectory = new File(migrationRootFolder);
         try (Connection connection = this.dataSource.getConnection()) {
             DirectoryResourceAccessor resourceAccessor = new DirectoryResourceAccessor(changelogDirectory);
-            liquibase = new Liquibase(dbChangelogFileName, resourceAccessor, new JdbcConnection(connection));
+            PostgresDatabase postgresDatabase = new PostgresDatabase();
+            postgresDatabase.setConnection(new JdbcConnection(connection));
+            postgresDatabase.setDefaultSchemaName(defaultSchemaName);
+            liquibase = new Liquibase(dbChangelogFileName, resourceAccessor, postgresDatabase);
             Contexts contexts = new Contexts();
             liquibase.update(contexts);
             connection.commit();

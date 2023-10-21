@@ -67,6 +67,7 @@ docker run -p 5432:5432 -e PROFILE=docker-dev ximtech/altium-migrator
     -e ALTIUM_DB_DATASOURCE='jdbc:postgresql://host.docker.internal:5432/altium-components' \
     -e ALTIUM_DB_USERNAME='postgres' \
     -e ALTIUM_DB_PASSWORD='postgres' \
+    -e LIQUIBASE_LIQUIBASE_SCHEMA_NAME=components \
     ximtech/altium-migrator:latest
 ```
 

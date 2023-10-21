@@ -28,3 +28,4 @@ git.repository.directory.name: "migrations"
 
 migration.root.folder: "src/main/resources/db"
 db.changelog.file.name: "db.changelog-master.xml"
+db.schema.name: ${LIQUIBASE_LIQUIBASE_SCHEMA_NAME:public}
