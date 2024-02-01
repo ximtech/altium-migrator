@@ -50,7 +50,8 @@ or any other hosted Postgres database by data source.
         - Check that empty database has been created: 
           - ![<img width="20" height="20"/>](assets/empty_database.png)
           
-6. When all has been configured and empty Database created. Then run application
+6. Create DB schema: `altium`. It will be used as default schema
+7. When all has been configured and empty Database created. Then run application
 
 ***Local development***
 ``` text

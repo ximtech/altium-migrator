@@ -28,4 +28,4 @@ git.repository.directory.name: "migrations"
 
 migration.root.folder: "src/main/resources/db"
 db.changelog.file.name: "db.changelog-master.xml"
-db.schema.name: ${LIQUIBASE_SCHEMA_NAME:public}
+db.schema.name: ${LIQUIBASE_SCHEMA_NAME:altium}

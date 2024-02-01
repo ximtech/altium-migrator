@@ -20,13 +20,12 @@ import spock.lang.Specification
 class DatabaseSpecTemplate extends Specification {
 
     static final String POSTGRES_TEST_IMAGE = "postgres:12.13-alpine"
-    static final String POSTGRES_DB_NAME = "test-altium-components"
     static final String POSTGRES_USERNAME = "postgres"
     static final String POSTGRES_PASSWORD = "postgres"
     
     @Shared
-    static final PostgreSQLContainer POSTGRE_SQL_CONTAINER = new PostgreSQLContainer(POSTGRES_TEST_IMAGE)
-            .withDatabaseName(POSTGRES_DB_NAME)
+    static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER = new PostgreSQLContainer<>(POSTGRES_TEST_IMAGE)
+            .withInitScript('init.sql')
             .withUsername(POSTGRES_USERNAME)
             .withPassword(POSTGRES_PASSWORD)
     
@@ -43,6 +42,8 @@ class DatabaseSpecTemplate extends Specification {
                     "spring.datasource.username=" + POSTGRE_SQL_CONTAINER.getUsername(),
                     "spring.datasource.password=" + POSTGRE_SQL_CONTAINER.getPassword()
             )
+            
+            
         }
     }
 }

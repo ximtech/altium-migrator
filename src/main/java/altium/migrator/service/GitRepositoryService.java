@@ -2,6 +2,7 @@ package altium.migrator.service;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,11 @@ public class GitRepositoryService {
     @SneakyThrows
     public void cloneRepositoryWithChangelog() {
         File destinationDirectory = new File(destinationPath);
+        if (!FileUtils.isEmptyDirectory(destinationDirectory)) {
+            log.info("Destination directory {} not empty. Skipping repository clone", destinationPath);
+            return;
+        }
+        
         log.info("Accessing git repository: {}", gitRepositoryUrl);
         Git.cloneRepository()
                 .setURI(gitRepositoryUrl)
