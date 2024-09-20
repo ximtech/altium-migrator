@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 @Slf4j
 @Service
@@ -42,6 +43,8 @@ public class LiquibaseMigrationService {
             DirectoryResourceAccessor resourceAccessor = new DirectoryResourceAccessor(changelogDirectory);
             PostgresDatabase postgresDatabase = new PostgresDatabase();
             postgresDatabase.setConnection(new JdbcConnection(connection));
+            Statement statement = connection.createStatement();
+            statement.execute("CREATE SCHEMA IF NOT EXISTS %1$s; SET SEARCH_PATH TO %1$s;".formatted(defaultSchemaName));
             postgresDatabase.setDefaultSchemaName(defaultSchemaName);
             liquibase = new Liquibase(dbChangelogFileName, resourceAccessor, postgresDatabase);
             Contexts contexts = new Contexts();

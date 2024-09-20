@@ -25,7 +25,6 @@ class DatabaseSpecTemplate extends Specification {
     
     @Shared
     static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER = new PostgreSQLContainer<>(POSTGRES_TEST_IMAGE)
-            .withInitScript('init.sql')
             .withUsername(POSTGRES_USERNAME)
             .withPassword(POSTGRES_PASSWORD)
     
