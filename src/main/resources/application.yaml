@@ -26,6 +26,6 @@ spring:
 git.repository.url: "https://github.com/ximtech/altium-library"
 git.repository.directory.name: "migrations"
 
-migration.root.folder: "/src/main/resources/db"
+migration.root.folder: "/tmp/src/main/resources/db"
 db.changelog.file.name: "db.changelog-master.xml"
 db.schema.name: ${LIQUIBASE_SCHEMA_NAME:altium}
