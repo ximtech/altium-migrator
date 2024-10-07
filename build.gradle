@@ -33,7 +33,7 @@ bootJar {
 }
 
 bootBuildImage {
-    builder = 'paketobuildpacks/builder-jammy-base'
+    builder = 'paketobuildpacks/builder-jammy-tiny'
     imageName = 'altium-migrator'
     publish = false
 }
