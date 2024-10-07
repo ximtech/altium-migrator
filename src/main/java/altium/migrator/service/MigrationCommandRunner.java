@@ -33,9 +33,7 @@ public class MigrationCommandRunner implements CommandLineRunner {
         File destinationFolder = new File(destinationPath);
         if (!destinationFolder.exists()) {
             log.info("Database migration directory not found: {}. Creating new one.", destinationPath);
-            if (!destinationFolder.mkdirs()) {
-                log.error("Failed to create directory: {}", destinationFolder);
-            }
+            FileUtils.forceMkdir(destinationFolder);
         }
     }
 }
